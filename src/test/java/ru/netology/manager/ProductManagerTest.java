@@ -35,15 +35,15 @@ class ProductManagerTest {
     @Test
     public void shouldRemoveById() {   //тест на метод удаления  продукта
 
-        ProductRepository repository = new ProductRepository();
+        ProductManager manager = new ProductManager();
 
-        repository.add(book1);
-        repository.add(book2);
-        repository.add(phone1);
+        manager.save(book1);
+        manager.save(book2);
+        manager.save(phone1);
 
-        repository.removeById(1);
+        manager.remove(1);
 
-        Product[] actual = repository.findAll();
+        Product[] actual = manager.getAll();
         Product[] expected = {book2, phone1};
 
         assertArrayEquals(actual, expected);

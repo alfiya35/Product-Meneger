@@ -8,17 +8,17 @@ public class ProductRepository {
     public ProductRepository(){ //Конструктор
 
     }
-    public ProductRepository(Product[] products){ //Конструктор
-        this.products = products;
-    }
+//    public ProductRepository(Product[] products){ //Конструктор
+//        this.products = products;
+
 
     public Product[] getProducts() { //Геттеры и Сеттеры
         return products;
     }
 
-    public void setProducts(Product[] products) {
-        this.products = products;
-    }
+//    public void setProducts(Product[] products) {
+//        this.products = products;
+
 
     public void add(Product product) { //метод добавления(сохранения) продукта
         Product[] tmp = new Product[products.length + 1];//создаем новый массив
