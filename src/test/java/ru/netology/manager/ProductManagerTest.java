@@ -14,7 +14,7 @@ class ProductManagerTest {
     Book book2 = new Book(2, "Стихи", "Пушкин", 250);
     Book book3 = new Book(3, "Собрание сочинений", "Цветаева", 300);
     Smartphone phone1 = new Smartphone(4, "Нокиа", 4500, "Китай");
-    Smartphone phone2 = new Smartphone(5, "Самсунг", 8500, "Китай");
+    Smartphone phone2 = new Smartphone(5, "Нокиа", 8500, "Япония");
 
 
     @Test
@@ -82,12 +82,29 @@ class ProductManagerTest {
 
         ProductManager manager = new ProductManager();
 
-
-        manager.add(book1);
-        manager.add(book2);
+        manager.save(book1);
+        manager.save(book2);
 
         Product[] actual = manager.searchBy("Тихий дон");
         Product[] expected = {book1};
+
+        assertArrayEquals(expected, actual);
+
+
+    }
+    @Test
+    public void shouldFindTheFoundGoodsMore() {
+
+        ProductManager manager = new ProductManager();
+
+        manager.save(book1);
+        manager.save(book2);
+        manager.save(book3);
+        manager.save(phone1);
+        manager.save(phone2);
+
+        Product[] actual = manager.searchBy("Нокиа");
+        Product[] expected = {phone1,phone2};
 
         assertArrayEquals(expected, actual);
 

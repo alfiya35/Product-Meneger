@@ -7,7 +7,8 @@ public class ProductManager {
 
     protected Product[] products = new Product[0];
 
-    protected ProductRepository repository;
+    protected ProductRepository repository = new ProductRepository();
+
 
 
 
@@ -27,11 +28,11 @@ public class ProductManager {
         this.repository = repository;
     }
 
-    public void add(Product product) { //метод добавления продуктов в репозиторий
+    public void save(Product product) { //метод добавления продуктов в репозиторий
         repository.add(product);
     }
 
-    public void removeById(int id) { //метод удвления продуктов
+    public void remove(int id) { //метод удвления продуктов
         repository.removeById(id);
     }
 
