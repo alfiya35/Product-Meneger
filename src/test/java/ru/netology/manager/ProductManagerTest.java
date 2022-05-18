@@ -122,8 +122,7 @@ class ProductManagerTest {
         repository.add(book2);
         repository.add(book3);
 
-        repository.removeById(10);
-
-        assertThrows(NotFoundException.class, () -> {repository.removeById(13);});
+        assertThrows(NotFoundException.class, () -> {
+            repository.removeById(10);});
     }
 }
