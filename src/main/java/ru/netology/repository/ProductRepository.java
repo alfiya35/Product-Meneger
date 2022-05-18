@@ -5,7 +5,7 @@ import ru.netology.domian.Product;
 public class ProductRepository {
     private Product[] products = new Product[0];
 
-    public ProductRepository(){ //Конструктор
+    public ProductRepository() { //Конструктор
 
     }
 //    public ProductRepository(Product[] products){ //Конструктор
@@ -33,7 +33,20 @@ public class ProductRepository {
         return getProducts();
     }
 
-    public void removeById(int id) { //метод удаления по id
+    public Product[] findById(int id) {
+        Product[] tmp = new Product[products.length];
+        for (int i = 0; i < products.length + 1; i++) {
+            if (i == id) {
+                return products;
+            }
+        }
+        return null;
+    }
+
+    public String removeById(int id) {//метод удаления по id
+        if (findById(id) == null) {
+            throw new NotFoundException("Element with id: " + id + " not found");
+        }
         int length = products.length - 1;
         Product[] tmp = new Product[length]; //создаем массив на одну ячейку меньше
         int index = 0; //номер ячейки в которую будем копировать
@@ -42,10 +55,12 @@ public class ProductRepository {
                 tmp[index] = product;
                 index++;
             }
+            products = tmp;
         }
-        // меняем наши элементы
-        products = tmp;
+        return null;
     }
-
 }
+
+
+
 

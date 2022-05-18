@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import ru.netology.domian.Book;
 import ru.netology.domian.Product;
 import ru.netology.domian.Smartphone;
+import ru.netology.repository.NotFoundException;
 import ru.netology.repository.ProductRepository;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -32,23 +33,6 @@ class ProductManagerTest {
         assertArrayEquals(actual, expected);
     }
 
-    @Test
-    public void shouldRemoveById() {   //тест на метод удаления  продукта
-
-        ProductManager manager = new ProductManager();
-
-        manager.save(book1);
-        manager.save(book2);
-        manager.save(phone1);
-
-        manager.remove(1);
-
-        Product[] actual = manager.getAll();
-        Product[] expected = {book2, phone1};
-
-        assertArrayEquals(actual, expected);
-
-    }
 
     @Test
     public void shouldDefineMatchesTrue() {
@@ -92,6 +76,7 @@ class ProductManagerTest {
 
 
     }
+
     @Test
     public void shouldFindTheFoundGoodsMore() {
 
@@ -104,10 +89,41 @@ class ProductManagerTest {
         manager.save(phone2);
 
         Product[] actual = manager.searchBy("Нокиа");
-        Product[] expected = {phone1,phone2};
+        Product[] expected = {phone1, phone2};
 
         assertArrayEquals(expected, actual);
 
 
+    }
+
+    @Test
+    public void shouldRemoveById() {   //тест на метод удаления существ.продукта
+
+        ProductManager manager = new ProductManager();
+
+        manager.save(book1);
+        manager.save(book2);
+        manager.save(phone1);
+
+        manager.remove(1);
+
+        Product[] actual = manager.getAll();
+        Product[] expected = {book2, phone1};
+
+        assertArrayEquals(actual, expected);
+
+    }
+
+    @Test
+    public void shouldRemoveNonExistentProduct() {   //тест на метод удаления существ.продукта
+
+        ProductRepository repository = new ProductRepository();
+        repository.add(book1);
+        repository.add(book2);
+        repository.add(book3);
+
+        repository.removeById(10);
+
+        assertThrows(NotFoundException.class, () -> {repository.removeById(13);});
     }
 }
